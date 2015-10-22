@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<br />
+<h2>Download report</h2>
+
+@Html.ActionLink("PDF", "Report", new {id= "PDF"})
+@Html.ActionLink("Excel", "Report", new { id = "Excel" })
+@Html.ActionLink("Word", "Report", new { id = "Word" })
+@Html.ActionLink("Image", "Report", new { id = "Image" })
