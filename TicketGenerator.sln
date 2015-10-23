@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketGenerator.Domain", "TicketGenerator.Domain\TicketGenerator.Domain.csproj", "{BE8B1211-272B-4D64-819A-649A5778B0E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsPrint", "TicketsPrint\TicketsPrint.csproj", "{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketGenerator.UI", "TicketGenerator.UI\TicketGenerator.UI.csproj", "{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,12 +20,12 @@ Global
 		{BE8B1211-272B-4D64-819A-649A5778B0E8}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{BE8B1211-272B-4D64-819A-649A5778B0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE8B1211-272B-4D64-819A-649A5778B0E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
-		{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
-		{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6EE3A4FF-5E93-436B-917C-E3DFF7AAE535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B818607A-3E99-49BF-AA03-2D6C5E5FA2D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
