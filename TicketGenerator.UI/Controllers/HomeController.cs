@@ -22,9 +22,6 @@ namespace TicketGenerator.UI.Controllers
 		[HttpPost]
 		public ActionResult TicketInfo(Ticket ticket)
 		{
-			if (!ModelState.IsValid)
-				return View();
-
 			TicketInfo newticket;
 			using (var ctx = new TicketDbContext())
 			{
@@ -32,6 +29,7 @@ namespace TicketGenerator.UI.Controllers
 				{
 					EventDate = ticket.EventDate,
 					EventName = ticket.EventName,
+					Price = 100,
 
 					Owner = new Person()
 					{
@@ -70,11 +68,6 @@ namespace TicketGenerator.UI.Controllers
 				{
 					Name = "TicketNumber",
 					Value = ticketId.ToString()
-				},
-				new ParameterValue
-				{
-					Name = "Price",
-					Value = "100"
 				}
 			};
 			

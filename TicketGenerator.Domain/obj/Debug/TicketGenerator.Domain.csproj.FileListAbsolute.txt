@@ -11,3 +11,4 @@ D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Dom
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.pdb
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.csprojResolveAssemblyReference.cache
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.Update.resources
+D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.ChangePricetype.resources

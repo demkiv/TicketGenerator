@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201510221410428_Update.Designer.cs">
       <DependentUpon>201510221410428_Update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510260950176_Change Price type.cs" />
+    <Compile Include="Migrations\201510260950176_Change Price type.Designer.cs">
+      <DependentUpon>201510260950176_Change Price type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketDbContext.cs" />
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510221410428_Update.resx">
       <DependentUpon>201510221410428_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510260950176_Change Price type.resx">
+      <DependentUpon>201510260950176_Change Price type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

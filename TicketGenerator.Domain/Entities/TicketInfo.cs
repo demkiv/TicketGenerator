@@ -12,7 +12,7 @@ namespace TicketGenerator.Domain.Entities
 		
 		public DateTime EventDate { get; set; }
 		public string EventName { get; set; }
-		public string Price { get; set; }
+		public double Price { get; set; }
 
 		public virtual Person Owner { get; set; }
 		public virtual Seat Seat{ get; set; }
