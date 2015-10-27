@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TicketGenerator.Domain.Entities
 {
@@ -10,16 +6,15 @@ namespace TicketGenerator.Domain.Entities
 	{
 		public int Id { get; set; }
 
-		public string Stadium { get; set; }
-		public string Sector { get; set; }
 		public int Row { get; set; }
 		public int Number { get; set; }
 
-		public virtual ICollection<TicketInfo> TicketInfos { get; set; }
+		public virtual Sector Sector { get; set; }
+		public virtual ICollection<Ticket> Tickets { get; set; }
 
 		public Seat()
 		{
-			TicketInfos = new List<TicketInfo>();
+			Tickets = new List<Ticket>();
 		}
 	}
 }

@@ -9,16 +9,15 @@ using TicketGenerator.Domain.Entities;
 
 namespace TicketGenerator.Domain.Configurations
 {
-	public class PersonConfigurations : EntityTypeConfiguration<Person>
+	public class EventConfigurations : EntityTypeConfiguration<Event>
 	{
-		public PersonConfigurations() 
+		public EventConfigurations()
 		{
-			this.ToTable("Persons");
+			this.ToTable("Events");
 			this.HasKey(p => p.Id);
 			this.Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasMany(p => p.Tickets).WithRequired(t => t.Owner).WillCascadeOnDelete(false);
+			this.HasMany(p => p.Tickets).WithRequired(t => t.Event).WillCascadeOnDelete(false);
 		}
-		
 	}
 }

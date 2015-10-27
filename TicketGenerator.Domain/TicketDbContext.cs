@@ -11,8 +11,13 @@ namespace TicketGenerator.Domain
 {
 	public class TicketDbContext : DbContext
 	{
-		public DbSet<TicketInfo> TicketInfos { get; set; }
+		public DbSet<Ticket> Tickets { get; set; }
+
 		public DbSet<Person> Persons { get; set; }
+		public DbSet<Event> Events { get; set; }
+
+		public DbSet<Stadium> Stadiums { get; set; }
+		public DbSet<Sector> Sectors { get; set; }
 		public DbSet<Seat> Seats { get; set; }
 
 		public TicketDbContext()
@@ -33,8 +38,11 @@ namespace TicketGenerator.Domain
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Configurations.Add(new TicketInfoConfigurations());
+            modelBuilder.Configurations.Add(new TicketConfigurations());
             modelBuilder.Configurations.Add(new PersonConfigurations());
+			modelBuilder.Configurations.Add(new EventConfigurations());
+			modelBuilder.Configurations.Add(new StadiumConfigurations());
+			modelBuilder.Configurations.Add(new SectorConfigurations());
             modelBuilder.Configurations.Add(new SeatConfigurations());
         }
 	}

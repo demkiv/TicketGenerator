@@ -16,42 +16,60 @@ namespace TicketGenerator.UI.Controllers
 
 		public ActionResult TicketInfo()
 		{
-			return View();
+			TicketInfo ticketInfo;
+			using (var ctx = new TicketDbContext())
+			{
+				ticketInfo = new TicketInfo()
+				{
+					EventName = ctx.Events.Find(1).Name,
+					EventDate = ctx.Events.Find(1).Date,
+					Stadium = ctx.Events.Find(1).Stadium.Name
+				};
+			}
+
+			return View(ticketInfo);
 		}
 
 		[HttpPost]
-		public ActionResult TicketInfo(Ticket ticket)
+		public ActionResult TicketInfo(TicketInfo ticket)
 		{
-			TicketInfo newticket;
-			using (var ctx = new TicketDbContext())
-			{
-				newticket = new TicketInfo()
-				{
-					EventDate = ticket.EventDate,
-					EventName = ticket.EventName,
-					Price = 100,
+			int SeatId = 0;
 
-					Owner = new Person()
-					{
-						FirstName = ticket.FirstName,
-						LastName = ticket.LastName,
-						MiddleName = ticket.MiddleName
-					},
+			//Ticket newticket;
+			//using (var ctx = new TicketDbContext())
+			//{
+			//	ctx.Seats.Find(SeatId).Status = true;
+			//	Seat selectedSeat = ctx.Seats.Find(SeatId);
 
-					Seat = new Seat()
-					{
-						Stadium = ticket.Stadium,
-						Sector = ticket.Sector,
-						Row = ticket.Row,
-						Number = ticket.Number
-					}
-				};
+			//	newticket = new Ticket()
+			//	{
+			//		EventDate = ticket.EventDate,
+			//		EventName = ticket.EventName,
+			//		Price = 100,
 
-				ctx.TicketInfos.Add(newticket);
-				ctx.SaveChanges();
-			}
+			//		Owner = new Person()
+			//		{
+			//			FirstName = ticket.FirstName,
+			//			LastName = ticket.LastName,
+			//			MiddleName = ticket.MiddleName
+			//		},
 
-			return File(CreatePDF(newticket.Id), "application/pdf");
+			//		Seat = selectedSeat
+			//		//Seat = new Sector()
+			//		//{
+			//		//	Stadium = ticket.Stadium,
+			//		//	SectorNumber = ticket.Sector,
+			//		//	Row = ticket.Row,
+			//		//	Number = ticket.Number
+			//		//}
+			//	};
+
+			//	ctx.TicketInfos.Add(newticket);
+			//	ctx.SaveChanges();
+			//}
+
+			//return File(CreatePDF(newticket.Id), "application/pdf");
+			return new EmptyResult();
 		}
 
 		private byte[] CreatePDF(int ticketId)

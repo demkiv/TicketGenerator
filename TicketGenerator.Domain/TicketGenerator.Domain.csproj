@@ -46,12 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\EventConfigurations.cs" />
     <Compile Include="Configurations\PersonConfigurations.cs" />
     <Compile Include="Configurations\SeatConfigurations.cs" />
-    <Compile Include="Configurations\TicketInfoConfigurations.cs" />
+    <Compile Include="Configurations\SectorConfigurations.cs" />
+    <Compile Include="Configurations\StadiumConfigurations.cs" />
+    <Compile Include="Configurations\TicketConfigurations.cs" />
+    <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Seat.cs" />
-    <Compile Include="Entities\TicketInfo.cs" />
+    <Compile Include="Entities\Sector.cs" />
+    <Compile Include="Entities\Stadium.cs" />
+    <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Migrations\201510211116456_Initial.cs" />
     <Compile Include="Migrations\201510211116456_Initial.Designer.cs">
       <DependentUpon>201510211116456_Initial.cs</DependentUpon>
@@ -63,6 +69,10 @@
     <Compile Include="Migrations\201510260950176_Change Price type.cs" />
     <Compile Include="Migrations\201510260950176_Change Price type.Designer.cs">
       <DependentUpon>201510260950176_Change Price type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510271151174_New db.cs" />
+    <Compile Include="Migrations\201510271151174_New db.Designer.cs">
+      <DependentUpon>201510271151174_New db.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510260950176_Change Price type.resx">
       <DependentUpon>201510260950176_Change Price type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510271151174_New db.resx">
+      <DependentUpon>201510271151174_New db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,16 +9,17 @@ using TicketGenerator.Domain.Entities;
 
 namespace TicketGenerator.Domain.Configurations
 {
-	public class SeatConfigurations : EntityTypeConfiguration<Seat>
+	public class StadiumConfigurations : EntityTypeConfiguration<Stadium>
 	{
-		public SeatConfigurations() 
+		public StadiumConfigurations()
 		{
-			this.ToTable("Seats");
+			this.ToTable("Stadiums");
 			this.HasKey(s => s.Id);
 			this.Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasMany(s => s.Tickets).WithRequired(t => t.Seat).WillCascadeOnDelete(false);
+			this.HasMany(s => s.Events).WithRequired(t => t.Stadium).WillCascadeOnDelete(false);
+			this.HasMany(s => s.Sectors).WithRequired(t => t.Stadium).WillCascadeOnDelete(false);
 		}
-		
+
 	}
 }

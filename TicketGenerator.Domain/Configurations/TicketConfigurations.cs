@@ -9,11 +9,11 @@ using TicketGenerator.Domain.Entities;
 
 namespace TicketGenerator.Domain.Configurations
 {
-	public class TicketInfoConfigurations : EntityTypeConfiguration<TicketInfo>
+	public class TicketConfigurations : EntityTypeConfiguration<Ticket>
 	{
-		public TicketInfoConfigurations()
+		public TicketConfigurations()
 		{
-			this.ToTable("TicketInfos");
+			this.ToTable("Tickets");
 			this.HasKey(ti => ti.Id);
 			this.Property(ti => ti.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 		}

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace TicketGenerator.UI.Models
 {
-	public class Ticket
+	public class TicketInfo
 	{
 		[DisplayName("Event Name")]
 		[Required(ErrorMessage = "Name is required")]

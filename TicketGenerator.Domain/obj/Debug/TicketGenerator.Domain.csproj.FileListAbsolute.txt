@@ -6,9 +6,9 @@ D:\Projects\TicketGenerator\TicketGenerator.Domain\bin\Debug\EntityFramework.Sql
 D:\Projects\TicketGenerator\TicketGenerator.Domain\bin\Debug\EntityFramework.xml
 D:\Projects\TicketGenerator\TicketGenerator.Domain\bin\Debug\EntityFramework.SqlServer.xml
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.Initial.resources
+D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.Update.resources
+D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.ChangePricetype.resources
+D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.Newdb.resources
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.csproj.GenerateResource.Cache
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.dll
 D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.pdb
-D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.csprojResolveAssemblyReference.cache
-D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.Update.resources
-D:\Projects\TicketGenerator\TicketGenerator.Domain\obj\Debug\TicketGenerator.Domain.Migrations.ChangePricetype.resources

@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace TicketGenerator.Domain.Entities
 {
-	public class Person
+	public class Event
 	{
 		public int Id { get; set; }
 
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string MiddleName { get; set; }
+		public string Name { get; set; }
+		public DateTime Date { get; set; }
+		public double Price { get; set; }
 
+		public virtual Stadium Stadium { get; set; }
 		public virtual ICollection<Ticket> Tickets { get; set; }
 
-		public Person()
+		public Event()
 		{
 			Tickets = new List<Ticket>();
 		}
