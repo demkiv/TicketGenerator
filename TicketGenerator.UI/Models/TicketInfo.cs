@@ -11,7 +11,8 @@ namespace TicketGenerator.UI.Models
 	public class TicketInfo
 	{
 		[DisplayName("Event Name")]
-		public string EventName { get; set; }
+		public int EventId { get; set; }
+		public List<DropDownListItem> Events { get; set; }
 
 		[DisplayName("Event Date")]
 		public string EventDate { get; set; }
@@ -19,7 +20,12 @@ namespace TicketGenerator.UI.Models
 
 		public string Stadium { get; set; }
 
-		public string Sector { get; set; }
+		[DisplayName("Sector")]
+		public int SectorId { get; set; }
+		public List<DropDownListItem> Sectors { get; set; }
+
+
+		public int SeatId { get; set; }
 
 		[DisplayName("Row Number")]
 		public string Row { get; set; }
@@ -41,14 +47,5 @@ namespace TicketGenerator.UI.Models
 		public string MiddleName { get; set; }
 
 		public double Price { get; set; }
-
-
-		public List<DropDownListItem> Events { get; set; }
-		public int EventId { get; set; }
-
-		public List<DropDownListItem> Sectors { get; set; }
-		public int SectorId { get; set; }
-
-		public int SeatId { get; set; }
 	}
 }

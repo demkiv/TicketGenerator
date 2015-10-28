@@ -105,6 +105,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\d3.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -130,7 +131,6 @@
     <Compile Include="Models\Helpers\DropDownListItem.cs" />
     <Compile Include="Models\Helpers\EventInfo.cs" />
     <Compile Include="Models\Helpers\SectorInfo.cs" />
-    <Compile Include="Models\IsDateAfterNowAttribute.cs" />
     <Compile Include="Models\SVG_model.cs" />
     <Compile Include="Models\TicketInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

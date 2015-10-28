@@ -23,10 +23,9 @@ namespace TicketGenerator.UI.Controllers
             {
                 ticketInfo = new TicketInfo()
                 {
-                    EventName = ctx.Events.First().Name,
-                    EventDate = ctx.Events.First().Date.ToString(),
+					Events = ctx.Events.Select(e => new DropDownListItem() { Id = e.Id, Value = e.Name }).ToList(),
+                    EventDate = ctx.Events.First().Date.ToString(CultureInfo.InvariantCulture),
                     Stadium = ctx.Stadiums.First().Name,
-                    Events = ctx.Events.Select(e => new DropDownListItem() { Id = e.Id, Value = e.Name }).ToList(),
                     Sectors = ctx.Sectors.Select(e => new DropDownListItem() { Id = e.Id, Value = e.Name }).ToList(),
                     Price = ctx.Events.First().Price
                 };
@@ -90,8 +89,7 @@ namespace TicketGenerator.UI.Controllers
                 ctx.SaveChanges();
             }
 
-            //return File(CreatePDF(newticket.Id), "application/pdf");
-            return new EmptyResult();
+			return File(CreatePDF(newTicket.Id), "application/pdf");
         }
 
         private byte[] CreatePDF(int ticketId)
