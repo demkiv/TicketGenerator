@@ -8,6 +8,8 @@
 <br /><br /><br />
 <h2>Create Ticket</h2>
 
+<div class="row">
+    <div class="col-sm-6">
 @using (Html.BeginForm("TicketInfo", "Home", FormMethod.Post, new { target = "_blank" }))
 {
 	@Html.AntiForgeryToken()
@@ -167,3 +169,10 @@
 		</div>
 	</div>
 }
+        </div>
+        <div class="col-sm-6">
+            <div id="test">
+            </div>
+            <script src="~/Scripts/SVG_Test.js"></script>
+        </div>
+    </div> 

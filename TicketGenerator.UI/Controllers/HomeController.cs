@@ -17,18 +17,18 @@ namespace TicketGenerator.UI.Controllers
 		public ActionResult TicketInfo()
 		{
 			TicketInfo ticketInfo;
-			using (var ctx = new TicketDbContext())
-			{
-				ticketInfo = new TicketInfo()
-				{
-					EventName = ctx.Events.Find(1).Name,
-					EventDate = ctx.Events.Find(1).Date,
-					Stadium = ctx.Events.Find(1).Stadium.Name
-				};
-			}
+            using (var ctx = new TicketDbContext())
+            {
+                ticketInfo = new TicketInfo()
+                {
+                    EventName = ctx.Events.Find(1).Name,
+                    EventDate = ctx.Events.Find(1).Date,
+                    Stadium = ctx.Events.Find(1).Stadium.Name
+                };
+            }
 
-			return View(ticketInfo);
-		}
+            return View(ticketInfo);            
+        }
 
 		[HttpPost]
 		public ActionResult TicketInfo(TicketInfo ticket)
@@ -91,8 +91,45 @@ namespace TicketGenerator.UI.Controllers
 			
 			return RenderReport(rs, format, mimeType, reportPath, parameters);
 		}
+        public JsonResult CreateSvgItems()
+        {
+            int sectorId = 2;
 
-		private static byte[] RenderReport(ReportExecutionService rs, string format, string mimeType, string reportPath,
+            using (var ctx = new TicketDbContext())
+            {
+                var seatsOfSector = (from s in ctx.Seats where s.Sector.Id == sectorId select s).ToList();
+                             
+               
+                int svgX = 60;
+                int svgY = 60;
+                int spaceX = 10;
+                int spaceY = 10;
+
+                int maxRow = seatsOfSector.Max(e => e.Number);
+                int maxCol = seatsOfSector.Max(e => e.Row);
+                SVG_model[,] k = new SVG_model[maxRow, maxCol];
+
+
+                for (int i = 0; i < maxRow; i++)
+                {
+                    for (int j = 0; j < maxCol; j++)
+                    {
+                        SVG_model test = new SVG_model();
+                        test.svgId = "svg" + (i + 1).ToString() + (j + 1).ToString();
+                        test.svgRow = i + 1;
+                        test.svgCol = j + 1;
+                        test.svgX = (svgX + spaceX) * i;
+                        test.svgY = (svgY + spaceY) * j;
+                        k[i, j] = test;
+
+                    }
+                }
+
+                return Json(k, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        private static byte[] RenderReport(ReportExecutionService rs, string format, string mimeType, string reportPath,
 			ParameterValue[] parameters)
 		{
 			rs.Credentials = CredentialCache.DefaultCredentials;
@@ -110,4 +147,6 @@ namespace TicketGenerator.UI.Controllers
 			return results;
 		}
 	}
+
+    
 }
