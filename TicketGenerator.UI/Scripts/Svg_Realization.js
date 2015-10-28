@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
 
-    $('div #test').click(function (event) {
+    $('svg#svg1 g rect').click(function (event) {
         var rectId = event.target.id;
 
         var color = $('#' + rectId + '').attr('fill');

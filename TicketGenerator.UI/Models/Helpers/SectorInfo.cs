@@ -7,7 +7,8 @@ namespace TicketGenerator.UI.Models.Helpers
 {
 	public class SectorInfo
 	{
-		public int RowNumber { get; set; }
+        public int SectorId { get; set; }
+        public int RowNumber { get; set; }
 		public int SeatNumber { get; set; }
 	}
 }
