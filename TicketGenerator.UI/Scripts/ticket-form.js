@@ -32,6 +32,9 @@
 			success: function (data) {
 			    console.log(data);
 
+			    $("#Row").val("");
+			    $("#Number").val("");
+
 				$.ajax({
 				    type: 'POST',
 				    url: "/Home/CreateSvgItems",
