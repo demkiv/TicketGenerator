@@ -52,22 +52,19 @@ namespace TicketGenerator.Domain.Migrations
 				{
 					Name = "Liverpool - Chelsea",
 					Date = new DateTime(2015, 11, 25, 21, 30, 0),
-					Price = 100,
-					Stadium = stadium
+					Price = 100
 				},
 				new Event()
 				{
 					Name = "Juventus - Milan",
 					Date = new DateTime(2015, 11, 18, 20, 30, 0),
-					Price = 150,
-					Stadium = stadium
+					Price = 150
 				},
 				new Event()
 				{
 					Name = "Arsenal - Barcelona",
 					Date = new DateTime(2015, 12, 6, 20, 0, 0),
-					Price = 200,
-					Stadium = stadium
+					Price = 200
 				}
 	        };
 
@@ -75,6 +72,8 @@ namespace TicketGenerator.Domain.Migrations
 	        {
 				context.Events.Add(e);
 	        }
+
+	        context.Stadiums.Add(stadium);
 
 			base.Seed(context);
             //  This method will be called after migrating to the latest version.

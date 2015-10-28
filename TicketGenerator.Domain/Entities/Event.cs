@@ -14,7 +14,6 @@ namespace TicketGenerator.Domain.Entities
 		public DateTime Date { get; set; }
 		public double Price { get; set; }
 
-		public virtual Stadium Stadium { get; set; }
 		public virtual ICollection<Ticket> Tickets { get; set; }
 
 		public Event()

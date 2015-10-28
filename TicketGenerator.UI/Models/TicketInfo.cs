@@ -4,18 +4,28 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using TicketGenerator.UI.Models.Helpers;
 
 namespace TicketGenerator.UI.Models
 {
 	public class TicketInfo
 	{
 		[DisplayName("Event Name")]
-		[Required(ErrorMessage = "Name is required")]
 		public string EventName { get; set; }
 
 		[DisplayName("Event Date")]
-		[Required(ErrorMessage = "Date is required")]
-		public DateTime EventDate { get; set; }
+		public string EventDate { get; set; }
+
+
+		public string Stadium { get; set; }
+
+		public string Sector { get; set; }
+
+		[DisplayName("Row Number")]
+		public string Row { get; set; }
+
+		[DisplayName("Seat Number")]
+		public string Number { get; set; }
 
 
 		[DisplayName("First Name")]
@@ -30,21 +40,15 @@ namespace TicketGenerator.UI.Models
 		[Required(ErrorMessage = "Middle Name is required")]
 		public string MiddleName { get; set; }
 
+		public double Price { get; set; }
 
-		[DisplayName("Stadium")]
-		[Required(ErrorMessage = "Stadium is required")]
-		public string Stadium { get; set; }
 
-		[DisplayName("Sector")]
-		[Required(ErrorMessage = "Sector is required")]
-		public string Sector { get; set; }
+		public List<DropDownListItem> Events { get; set; }
+		public int EventId { get; set; }
 
-		[DisplayName("Row Number")]
-		[Required(ErrorMessage = "Row Number is required")]
-		public int Row { get; set; }
+		public List<DropDownListItem> Sectors { get; set; }
+		public int SectorId { get; set; }
 
-		[DisplayName("Seat Number")]
-		[Required(ErrorMessage = "Seat Number is required")]
-		public int Number { get; set; }
+		public int SeatId { get; set; }
 	}
 }

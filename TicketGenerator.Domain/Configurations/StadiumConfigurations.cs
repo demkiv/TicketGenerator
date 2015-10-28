@@ -17,7 +17,6 @@ namespace TicketGenerator.Domain.Configurations
 			this.HasKey(s => s.Id);
 			this.Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasMany(s => s.Events).WithRequired(t => t.Stadium).WillCascadeOnDelete(false);
 			this.HasMany(s => s.Sectors).WithRequired(t => t.Stadium).WillCascadeOnDelete(false);
 		}
 
