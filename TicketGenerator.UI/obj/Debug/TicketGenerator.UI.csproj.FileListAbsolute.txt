@@ -22,3 +22,5 @@ D:\Projects\TicketGenerator\TicketGenerator.UI\bin\System.Web.Helpers.xml
 D:\Projects\TicketGenerator\TicketGenerator.UI\bin\System.Web.Mvc.xml
 D:\Projects\TicketGenerator\TicketGenerator.UI\obj\Debug\TicketGenerator.UI.dll
 D:\Projects\TicketGenerator\TicketGenerator.UI\obj\Debug\TicketGenerator.UI.pdb
+D:\Projects\TicketGenerator\TicketGenerator.UI\bin\Newtonsoft.Json.dll
+D:\Projects\TicketGenerator\TicketGenerator.UI\bin\Newtonsoft.Json.xml

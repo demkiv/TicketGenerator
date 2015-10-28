@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201510271151174_New db.Designer.cs">
       <DependentUpon>201510271151174_New db.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510272045171_Delete Stadium Event relation.cs" />
+    <Compile Include="Migrations\201510272045171_Delete Stadium Event relation.Designer.cs">
+      <DependentUpon>201510272045171_Delete Stadium Event relation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketDbContext.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510271151174_New db.resx">
       <DependentUpon>201510271151174_New db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510272045171_Delete Stadium Event relation.resx">
+      <DependentUpon>201510272045171_Delete Stadium Event relation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

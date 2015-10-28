@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -7,7 +8,9 @@ using System.Web.Mvc;
 using TicketGenerator.Domain;
 using TicketGenerator.Domain.Entities;
 using TicketGenerator.UI.Models;
+using TicketGenerator.UI.Models.Helpers;
 using TicketGenerator.UI.ReportingServiceReference;
+using Newtonsoft.Json;
 
 namespace TicketGenerator.UI.Controllers
 {
@@ -21,52 +24,73 @@ namespace TicketGenerator.UI.Controllers
 			{
 				ticketInfo = new TicketInfo()
 				{
-					EventName = ctx.Events.Find(1).Name,
-					EventDate = ctx.Events.Find(1).Date,
-					Stadium = ctx.Events.Find(1).Stadium.Name
+					EventName = ctx.Events.First().Name,
+					EventDate = ctx.Events.First().Date.ToString(),
+					Stadium = ctx.Stadiums.First().Name,
+					Events = ctx.Events.Select(e => new DropDownListItem() { Id = e.Id, Value = e.Name }).ToList(),
+					Sectors = ctx.Sectors.Select(e => new DropDownListItem() { Id = e.Id, Value = e.Name }).ToList(),
+					Price = ctx.Events.First().Price
 				};
 			}
 
 			return View(ticketInfo);
 		}
 
+		[HttpGet]
+		public ActionResult GetEventInfo(int eventId)
+		{
+			using (var ctx = new TicketDbContext())
+			{
+				Event e = ctx.Events.Find(eventId);
+				EventInfo eventInfo = new EventInfo()
+				{
+					EventDate = e.Date.ToString(),
+					Price = e.Price
+				};
+
+				return Json(eventInfo, JsonRequestBehavior.AllowGet);
+			}
+		}
+
+		[HttpGet]
+		public ActionResult GetSectorInfo(int sectorId)
+		{
+			using (var ctx = new TicketDbContext())
+			{
+				Sector sector = ctx.Sectors.Find(sectorId);
+				SectorInfo sectorInfo = new SectorInfo()
+				{
+					RowNumber = sector.RowNumber,
+					SeatNumber = sector.SeatNumber
+				};
+
+				return Json(sectorInfo, JsonRequestBehavior.AllowGet);
+			}
+		}
+
 		[HttpPost]
 		public ActionResult TicketInfo(TicketInfo ticket)
 		{
-			int SeatId = 0;
+			ticket.SeatId = 1;
 
-			//Ticket newticket;
-			//using (var ctx = new TicketDbContext())
-			//{
-			//	ctx.Seats.Find(SeatId).Status = true;
-			//	Seat selectedSeat = ctx.Seats.Find(SeatId);
+			Ticket newTicket;
+			using (var ctx = new TicketDbContext())
+			{
+				newTicket = new Ticket()
+				{
+					Owner = new Person()
+					{
+						FirstName = ticket.FirstName,
+						LastName = ticket.LastName,
+						MiddleName = ticket.MiddleName
+					},
+					Event = ctx.Events.Find(ticket.EventId),
+					Seat = ctx.Seats.Find(ticket.SeatId)
+				};
 
-			//	newticket = new Ticket()
-			//	{
-			//		EventDate = ticket.EventDate,
-			//		EventName = ticket.EventName,
-			//		Price = 100,
-
-			//		Owner = new Person()
-			//		{
-			//			FirstName = ticket.FirstName,
-			//			LastName = ticket.LastName,
-			//			MiddleName = ticket.MiddleName
-			//		},
-
-			//		Seat = selectedSeat
-			//		//Seat = new Sector()
-			//		//{
-			//		//	Stadium = ticket.Stadium,
-			//		//	SectorNumber = ticket.Sector,
-			//		//	Row = ticket.Row,
-			//		//	Number = ticket.Number
-			//		//}
-			//	};
-
-			//	ctx.TicketInfos.Add(newticket);
-			//	ctx.SaveChanges();
-			//}
+				ctx.Tickets.Add(newTicket);
+				ctx.SaveChanges();
+			}
 
 			//return File(CreatePDF(newticket.Id), "application/pdf");
 			return new EmptyResult();

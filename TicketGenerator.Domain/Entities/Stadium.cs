@@ -12,12 +12,10 @@ namespace TicketGenerator.Domain.Entities
 
 		public string Name { get; set; }
 
-		public virtual ICollection<Event> Events { get; set; }
 		public virtual ICollection<Sector> Sectors { get; set; }
 
 		public Stadium()
 		{
-			Events = new List<Event>();
 			Sectors = new List<Sector>();
 		}
 	}
