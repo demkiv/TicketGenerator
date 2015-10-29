@@ -13,6 +13,7 @@ namespace TicketGenerator.UI.Models
         public int svgX { get; set; }
         public int svgY { get; set; }
         public int svgCol { get; set; }
+        public bool svgReserved { get; set; }
 
     }
 }
