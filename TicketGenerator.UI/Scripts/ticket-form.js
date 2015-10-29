@@ -3,33 +3,15 @@
 
 var TicketInfo = function () {
 
-	var eventInfo = function () {
-		
-		var eventId = $("#EventId option:selected").val();
-		$.ajax({
+	var eventSectorInfo = function () {
+
+	    var sectorId = $("#SectorId option:selected").val();
+	    var eventId = $("#EventId option:selected").val();
+
+	    $.ajax({
 			type: "get",
-			url: "/Home/GetEventInfo",
-			data: "eventId=" + eventId,
-			dataType: "json",
-			contentType: 'application/json',
-			success: function (data) {
-				$("#EventDate").val(data.EventDate);
-				$("#Price").val(data.Price);
-			},
-			error: function (jqXhr, textStatus, errorThrown) {
-				console.log(textStatus, errorThrown);
-			}
-		});
-
-	}
-
-	var sectorInfo = function () {
-
-		var sectorId = $("#SectorId option:selected").val();
-		$.ajax({
-			type: "get",
-			url: "/Home/GetSectorInfo",
-			data: "sectorId=" + sectorId,
+			url: "/Home/GetEventSectorInfo",
+			data: "sectorId=" + sectorId + "&eventId=" + eventId,
 			dataType: "json",
 			contentType: 'application/json',
 			success: function (data) {
@@ -37,6 +19,8 @@ var TicketInfo = function () {
 
 			    $("#Row").val("");
 			    $("#Number").val("");
+			    $("#EventDate").val(data.EventDate);
+			    $("#Price").val(data.Price);
 
 				$.ajax({
 				    type: 'POST',
@@ -187,8 +171,7 @@ var TicketInfo = function () {
 
 	}
 	return {
-		EventInfo : eventInfo,
-		SectorInfo: sectorInfo
+		EventSectorInfo: eventSectorInfo
 	};
 }();
 
@@ -273,9 +256,16 @@ $(document).ready(function () {
                                                 .style("font", "8 8px Helvetica Neue")
                                                 .style("fill", "#006699")
                                                 .text("" + this.__data__.svgRow + "");
-                                    //alert(info.svgX);
-                                    //d3.select(this).ajax(alert(JSON.stringify(data)));
-                                    //alert(this.__data__.svgRow);
+
+                                    var allBlueRects = [];
+                                    allBlueRects = d3.selectAll('rect');
+
+                                    for (var i = 0; i < allBlueRects[0].length;i++)
+                                    {
+                                        //console.log(allBlueRects[0][i].attr('fill'));
+
+                                    }
+
                                     $("#Row").val(this.__data__.svgCol);
                                     $("#Number").val(this.__data__.svgRow);
                                     $("#SeatId").val(parseInt(this.__data__.svgId.substring(1, this.__data__.svgId.length)));

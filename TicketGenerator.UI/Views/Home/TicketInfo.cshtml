@@ -24,7 +24,7 @@
 					<div class="col-sm-8">
 						<div class="col-sm-10 col-xs-12">
 							<div class="row">
-								@Html.DropDownListFor(model => model.EventId, new SelectList(Model.Events, "Id", "Value"), new { @class = "form-control", @onchange = "TicketInfo.EventInfo()" })
+								@Html.DropDownListFor(model => model.EventId, new SelectList(Model.Events, "Id", "Value"), new { @class = "form-control", @onchange = "TicketInfo.EventSectorInfo()" })
 							</div>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 					<div class="col-sm-8">
 						<div class="col-sm-10 col-xs-12">
 							<div class="row">
-								@Html.DropDownListFor(model => model.SectorId, new SelectList(Model.Sectors, "Id", "Value"), new { @class = "form-control", @onchange = "TicketInfo.SectorInfo()" })
+								@Html.DropDownListFor(model => model.SectorId, new SelectList(Model.Sectors, "Id", "Value"), new { @class = "form-control", @onchange = "TicketInfo.EventSectorInfo()" })
 							</div>
 						</div>
 					</div>
