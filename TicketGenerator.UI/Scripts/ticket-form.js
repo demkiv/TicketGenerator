@@ -1,5 +1,5 @@
 ﻿
-
+var selectedItem;
 
 var TicketInfo = function () {
 
@@ -55,20 +55,20 @@ var TicketInfo = function () {
                                                     return data.svgY;
                                                 },
                                                 'id': function (data, index) {
-                                                    return data.svgId
+	                                                return data.svgId;
                                                 },
                                                 'width': function (data, index) {
-                                                    return 50
+	                                                return 50;
                                                 },
                                                 'height': function (data, index) {
-                                                    return 50
+	                                                return 50;
                                                 },
                                                 'fill': function (data, index) {
                                                     if (data.svgReserved) {
-                                                        return '#C0C0C0'
+	                                                    return '#C0C0C0';
                                                     }
                                                     else {
-                                                        return '#006699'
+	                                                    return '#006699';
                                                     }
                                                 },
 
@@ -82,6 +82,10 @@ var TicketInfo = function () {
                                                 }
                                                 else {
 
+	                                                if (selectedItem != undefined) {
+		                                                d3.select('rect#' + selectedItem + '').attr('fill', "#006699");
+	                                                }
+	                                                selectedItem = this.__data__.svgId;
                                                     d3.select('rect#' + this.__data__.svgId + '').attr("fill", "#FFFFCC");
                                                     var recX = $('#' + this.__data__.svgId + '').attr('x');
                                                     var recY = $('#' + this.__data__.svgId + '').attr('y');
@@ -98,12 +102,12 @@ var TicketInfo = function () {
                                                                 .attr("text-anchor", "middle")
                                                                 .style("font", "8 8px Helvetica Neue")
                                                                 .style("fill", "#006699")
-                                                                .text("" + this.__data__.svgRow + "");
+                                                                .text("" + this.__data__.svgCol + "");
                                                     //alert(info.svgX);
                                                     //d3.select(this).ajax(alert(JSON.stringify(data)));
                                                     //alert(this.__data__.svgRow);
-                                                    $("#Row").val(this.__data__.svgCol);
-                                                    $("#Number").val(this.__data__.svgRow);
+                                                    $("#Row").val(this.__data__.svgRow);
+                                                    $("#Number").val(this.__data__.svgCol);
                                                     $("#SeatId").val(parseInt(this.__data__.svgId.substring(1, this.__data__.svgId.length)));
                                                 }
                                             })                                            
@@ -170,8 +174,30 @@ var TicketInfo = function () {
 		});
 
 	}
+
+	var submitButtonClick = function () {
+		$(document).on("submit", "#ticket-form", function (e) {
+
+			e.preventDefault();
+			$.ajax({
+				url: "/Home/TicketInfo",
+				type: "post",
+				data: $(this).serialize(),
+				success: function (data) {
+					d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
+					window.open("/Home/OpenPDF?id=" + data.TicketId);
+				},
+				error: function (jqXhr, textStatus, errorThrown) {
+					console.log(textStatus, errorThrown);
+				}
+			});
+
+		});
+	}
+
 	return {
-		EventSectorInfo: eventSectorInfo
+		EventSectorInfo: eventSectorInfo,
+		SubmitButtonClick: submitButtonClick
 	};
 }();
 
@@ -239,6 +265,11 @@ $(document).ready(function () {
                                 }
                                 else {
 
+                                	if (selectedItem != undefined) {
+                                		d3.select('rect#' + selectedItem + '').attr('fill', "#006699");
+                                	}
+                                	selectedItem = this.__data__.svgId;
+
                                     d3.select('rect#' + this.__data__.svgId + '').attr("fill", "#FFFFCC");
                                     var recX = $('#' + this.__data__.svgId + '').attr('x');
                                     var recY = $('#' + this.__data__.svgId + '').attr('y');
@@ -255,7 +286,7 @@ $(document).ready(function () {
                                                 .attr("text-anchor", "middle")
                                                 .style("font", "8 8px Helvetica Neue")
                                                 .style("fill", "#006699")
-                                                .text("" + this.__data__.svgRow + "");
+                                                .text("" + this.__data__.svgCol + "");
 
                                     var allBlueRects = [];
                                     allBlueRects = d3.selectAll('rect');
@@ -266,8 +297,8 @@ $(document).ready(function () {
 
                                     }
 
-                                    $("#Row").val(this.__data__.svgCol);
-                                    $("#Number").val(this.__data__.svgRow);
+                                    $("#Row").val(this.__data__.svgRow);
+                                    $("#Number").val(this.__data__.svgCol);
                                     $("#SeatId").val(parseInt(this.__data__.svgId.substring(1, this.__data__.svgId.length)));
                                 }
                             })

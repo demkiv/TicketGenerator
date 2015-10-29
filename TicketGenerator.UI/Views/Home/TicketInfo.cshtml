@@ -9,7 +9,7 @@
 <h2>Create Ticket</h2>
 
 
-@using (Html.BeginForm("TicketInfo", "Home", FormMethod.Post, new { target = "_blank" }))
+@using (Html.BeginForm("TicketInfo", "Home", FormMethod.Post, new { target = "_blank", id = "ticket-form" }))
 {
 	@Html.AntiForgeryToken()
 
@@ -136,7 +136,7 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-md-8">
-						<input type="submit" value="Create" class="btn btn-default" />
+						<input type="submit" value="Create" class="btn btn-default" onclick="TicketInfo.SubmitButtonClick()" />
 					</div>
 				</div>
 			</div>

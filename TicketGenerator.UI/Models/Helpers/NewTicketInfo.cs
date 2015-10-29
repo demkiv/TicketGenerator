@@ -5,8 +5,9 @@ using System.Web;
 
 namespace TicketGenerator.UI.Models.Helpers
 {
-	public class EventInfo
+	public class NewTicketInfo
 	{
-
+		public int TicketId { get; set; }
+		public int SeatId { get; set; }
 	}
 }

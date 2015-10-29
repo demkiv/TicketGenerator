@@ -79,8 +79,20 @@ namespace TicketGenerator.UI.Controllers
                 ctx.SaveChanges();
             }
 
-            return File(CreatePDF(newTicket.Id), "application/pdf");
+			NewTicketInfo newTicketInfo = new NewTicketInfo()
+			{
+				TicketId = newTicket.Id,
+				SeatId = newTicket.Seat.Id
+			};
+
+			return Json(newTicketInfo, JsonRequestBehavior.AllowGet);
+	        //return File(CreatePDF(newTicket.Id), "application/pdf");
         }
+
+	    public ActionResult OpenPDF(int id)
+	    {
+			return File(CreatePDF(id), "application/pdf");
+	    }
 
         private byte[] CreatePDF(int ticketId)
         {
@@ -158,8 +170,8 @@ namespace TicketGenerator.UI.Controllers
                 test.svgId = "r" + seat.Id;
                 test.svgRow = i + 1;
                 test.svgCol = j + 1;
-                test.svgX = (svgX + spaceX)*i + 60;
-                test.svgY = (svgY + spaceY)*j;
+                test.svgX = (svgX + spaceX)*j + 60;
+                test.svgY = (svgY + spaceY)*i;
                 k[i, j] = test;
 
                 j++;

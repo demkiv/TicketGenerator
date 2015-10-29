@@ -129,7 +129,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Helpers\DropDownListItem.cs" />
-    <Compile Include="Models\Helpers\EventInfo.cs" />
+    <Compile Include="Models\Helpers\NewTicketInfo.cs" />
     <Compile Include="Models\Helpers\SectorInfo.cs" />
     <Compile Include="Models\SVG_model.cs" />
     <Compile Include="Models\TicketInfo.cs" />
