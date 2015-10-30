@@ -68,7 +68,7 @@ var createSvg = function (data) {
                     }
 
                     if (this.__data__.svgReserved) {
-                        alert("This ticked is booked!");
+                    	swal({ title: "This ticket is already sold!", text: "Please, pick another one.", type: "error", confirmButtonText: "Ok" });
                         $("#Row").val("");
                         $("#Number").val("");
                         $("#SeatId").val("");
@@ -206,7 +206,7 @@ var TicketInfo = function () {
 		var seatid = $("#SeatId").val();
 
 		if (seatid === "0" || seatid === "") {
-			alert("Please select a seat!");
+			swal({ title: "You didn't choose a seat...", text: "Please, pick one!", type: "error", confirmButtonText: "Ok" });
 		} else {
 
 			$.ajax({
