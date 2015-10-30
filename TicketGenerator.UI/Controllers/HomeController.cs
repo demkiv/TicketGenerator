@@ -60,30 +60,42 @@ namespace TicketGenerator.UI.Controllers
         [HttpPost]
         public ActionResult TicketInfo(TicketInfo ticket)
         {
-            Ticket newTicket;
+            var newTicket = new Ticket();
+			NewTicketInfo newTicketInfo;
             using (var ctx = new TicketDbContext())
             {
-                newTicket = new Ticket()
-                {
-                    Owner = new Person()
-                    {
-                        FirstName = ticket.FirstName,
-                        LastName = ticket.LastName,
-                        MiddleName = ticket.MiddleName
-                    },
-                    Event = ctx.Events.Find(ticket.EventId),
-                    Seat = ctx.Seats.Find(ticket.SeatId)
-                };
+				if (ctx.Tickets.SingleOrDefault(t => t.Seat.Id == ticket.SeatId && t.Event.Id == ticket.EventId) == null)
+	            {
+		            newTicket = new Ticket()
+		            {
+			            Owner = new Person()
+			            {
+				            FirstName = ticket.FirstName,
+				            LastName = ticket.LastName,
+				            MiddleName = ticket.MiddleName
+			            },
+			            Event = ctx.Events.Find(ticket.EventId),
+			            Seat = ctx.Seats.Find(ticket.SeatId)
+		            };
 
-                ctx.Tickets.Add(newTicket);
-                ctx.SaveChanges();
+		            ctx.Tickets.Add(newTicket);
+		            ctx.SaveChanges();
+
+		            newTicketInfo = new NewTicketInfo()
+		            {
+			            IsSuccessfulOperation = true,
+			            TicketId = newTicket.Id,
+			            SeatId = newTicket.Seat.Id
+		            };
+	            }
+	            else
+	            {
+					newTicketInfo = new NewTicketInfo()
+					{
+						IsSuccessfulOperation = false
+					};
+	            }
             }
-
-			NewTicketInfo newTicketInfo = new NewTicketInfo()
-			{
-				TicketId = newTicket.Id,
-				SeatId = newTicket.Seat.Id
-			};
 
 			return Json(newTicketInfo, JsonRequestBehavior.AllowGet);
         }

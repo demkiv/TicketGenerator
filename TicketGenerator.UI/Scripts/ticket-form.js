@@ -214,17 +214,22 @@ var TicketInfo = function () {
 				type: "post",
 				data: $(this).serialize(),
 				success: function (data) {
-					d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
-					d3.select('text#r' + data.SeatId + '').remove();
 
-					boughtItem = 'r' + data.SeatId;
-					selectedItem = undefined;
+					if (data.IsSuccessfulOperation) {
+						d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
+						d3.select('text#r' + data.SeatId + '').remove();
 
-					$("#Row").val("");
-					$("#Number").val("");
-					$("#SeatId").val("");
+						boughtItem = 'r' + data.SeatId;
+						selectedItem = undefined;
 
-					window.open("/Home/OpenPDF?id=" + data.TicketId);
+						$("#Row").val("");
+						$("#Number").val("");
+						$("#SeatId").val("");
+
+						window.open("/Home/OpenPDF?id=" + data.TicketId);
+					} else {
+						swal({ title: "Oops... Something went wrong...", text: "Please, reload the page and try again!", type: "error", confirmButtonText: "Ok" });
+					}
 				},
 				error: function (jqXhr, textStatus, errorThrown) {
 					console.log(textStatus, errorThrown);
