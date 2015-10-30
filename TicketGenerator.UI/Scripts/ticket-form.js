@@ -220,6 +220,10 @@ var TicketInfo = function () {
 					boughtItem = 'r' + data.SeatId;
 					selectedItem = undefined;
 
+					$("#Row").val("");
+					$("#Number").val("");
+					$("#SeatId").val("");
+
 					window.open("/Home/OpenPDF?id=" + data.TicketId);
 				},
 				error: function (jqXhr, textStatus, errorThrown) {
