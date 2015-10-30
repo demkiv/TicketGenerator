@@ -235,7 +235,7 @@ namespace TicketGenerator.UI.Controllers
                 test.svgId = "R " + (i + 1) + "";
                 test.svgRow = i + 1;
                 test.svgX = 25;
-                test.svgY = (svgY + spaceY)*i + 25;
+                test.svgY = (svgY + spaceY)*i + 30;
                 k[i] = test;
             }
 
