@@ -121,6 +121,11 @@ namespace TicketGenerator.UI.Controllers
             int maxRow = 0;
             int maxCol = 0;
             int eventId;
+            int svgX = 60;
+            int svgY = 60;
+            int spaceX = 10;
+            int spaceY = 10;
+
             if (sectorInfo.SectorId == 0)
             {
                 using (var ctx = new TicketDbContext())
@@ -138,87 +143,40 @@ namespace TicketGenerator.UI.Controllers
                 maxRow = sectorInfo.RowNumber;
                 maxCol = sectorInfo.SeatNumber;
             }
-            int svgX = 60;
-            int svgY = 60;
-            int spaceX = 10;
-            int spaceY = 10;
-
 
             SVG_model[,] k = new SVG_model[maxRow, maxCol];
 
             List<Seat> seats = new List<Seat>();
             List<Ticket> tickets = new List<Ticket>();
             List<int> seatsIdList = new List<int>();
+
             using (var ctx = new TicketDbContext())
             {
                 seats = ctx.Seats.Where(s => s.Sector.Id == sectorId).Cast<Seat>().ToList();
                 tickets = ctx.Tickets.Where(t => t.Event.Id == eventId).Cast<Ticket>().ToList();
-                
                 seatsIdList = tickets.Select(t => t.Seat.Id).ToList();
             }
-
-            
 
             int i = 0;
             int j = 0;
             foreach (var seat in seats)
             {
                 var test = new SVG_model();
-
                 test.svgReserved = seatsIdList.Find(s => s == seat.Id) != 0;
-
                 test.svgId = "r" + seat.Id;
                 test.svgRow = i + 1;
                 test.svgCol = j + 1;
                 test.svgX = (svgX + spaceX)*j + 60;
                 test.svgY = (svgY + spaceY)*i;
                 k[i, j] = test;
-
                 j++;
                 if (j == maxCol)
                 {
                     j = 0;
                     i++;
                 }
-                
+
             }
-            
-            //for (int i = 0; i < maxRow; i++)
-            //{
-            //    for (int j = 0; j < maxCol; j++)
-            //    {
-            //        using (var ctx = new TicketDbContext())
-            //        {
-            //            //var ticketIdformDB = (from s in ctx.Seats where s.Number == i + 1 && s.Row == j + 1 && s.Sector.Id == sectorId select s.Id).First();
-            //            var seatIdformDB = ctx.Seats.First(s => s.Sector.Id == sectorId && s.Row == i + 1 && s.Number == j + 1).Id;
-            //            var ticketIdformDB = ctx.Tickets.First(t => t.Seat.Id == seatIdformDB && t.Event.Id == ctx.Events.First().Id).Id;
-            //            if (ticketIdformDB == 20)
-            //            { }
-            //            SVG_model test = new SVG_model();
-            //            try
-            //            {
-            //                var isReserv = ctx.Tickets.Find(ticketIdformDB);
-            //                //var isReserv2 = ctx.Tickets.Where(t => t.Seat.Id == ticketIdformDB).First();
-            //                if (isReserv == null)
-            //                { test.svgReserved = false; }
-            //                else
-            //                { test.svgReserved = true; }
-            //            }
-            //            catch
-            //            {
-            //                test.svgReserved = false;
-            //            }
-
-            //            test.svgId = "r" + ticketIdformDB.ToString();
-            //            test.svgRow = i + 1;
-            //            test.svgCol = j + 1;
-            //            test.svgX = (svgX + spaceX) * i + 60;
-            //            test.svgY = (svgY + spaceY) * j;
-            //            k[i, j] = test;
-            //        }
-            //    }
-            //}
-
             return Json(k, JsonRequestBehavior.AllowGet);
 
         }
@@ -228,6 +186,11 @@ namespace TicketGenerator.UI.Controllers
             int sectorId = 0;
             int maxRow = 0;
             int maxCol = 0;
+            int svgX = 0;
+            int svgY = 25;
+            int spaceX = 10;
+            int spaceY = 45;
+
             if (sectorInfo.SectorId == 0)
             {
                 using (var ctx = new TicketDbContext())
@@ -235,7 +198,6 @@ namespace TicketGenerator.UI.Controllers
                     sectorId = ctx.Sectors.First().Id;
                     maxRow = ctx.Seats.Where(r => r.Sector.Id == sectorId).Max(s => s.Row);
                     maxCol = ctx.Seats.Where(r => r.Sector.Id == sectorId).Max(c => c.Number);
-
                 }
             }
             else
@@ -245,25 +207,18 @@ namespace TicketGenerator.UI.Controllers
                 maxCol = sectorInfo.SeatNumber;
 
             }
-            int svgX = 0;
-            int svgY = 25;
-            int spaceX = 10;
-            int spaceY = 45;
 
+            SVG_model[] k = new SVG_model[maxRow];
+            int rowNumberX = maxCol*70 + 140;
 
-
-            SVG_model[] k = new SVG_model[maxCol];
-            int rowNumberX = maxCol * 70 + 140;
-
-            for (int i = 0; i < maxCol; i++)
+            for (int i = 0; i < maxRow; i++)
             {
                 SVG_model test = new SVG_model();
                 test.svgId = "R " + (i + 1) + "";
                 test.svgRow = i + 1;
                 test.svgX = 25;
-                test.svgY = (svgY + spaceY) * i + 25;
+                test.svgY = (svgY + spaceY)*i + 25;
                 k[i] = test;
-
             }
 
             return Json(k, JsonRequestBehavior.AllowGet);

@@ -83,7 +83,8 @@ var TicketInfo = function () {
                                                 else {
 
 	                                                if (selectedItem != undefined) {
-		                                                d3.select('rect#' + selectedItem + '').attr('fill', "#006699");
+	                                                    d3.select('rect#' + selectedItem + '').attr('fill', "#006699");
+	                                                    d3.select('text#' + selectedItem + '').remove();
 	                                                }
 	                                                selectedItem = this.__data__.svgId;
                                                     d3.select('rect#' + this.__data__.svgId + '').attr("fill", "#FFFFCC");
@@ -103,20 +104,19 @@ var TicketInfo = function () {
                                                                 .style("font", "8 8px Helvetica Neue")
                                                                 .style("fill", "#006699")
                                                                 .text("" + this.__data__.svgCol + "");
-                                                    //alert(info.svgX);
-                                                    //d3.select(this).ajax(alert(JSON.stringify(data)));
-                                                    //alert(this.__data__.svgRow);
+                                                    
                                                     $("#Row").val(this.__data__.svgRow);
                                                     $("#Number").val(this.__data__.svgCol);
                                                     $("#SeatId").val(parseInt(this.__data__.svgId.substring(1, this.__data__.svgId.length)));
                                                 }
-                                            })                                            
+                                            })
+				           
 				    },
 				    error: function (data) { console.log(data) },
 				    contentType: 'application/json; charset=UTF-8',
 				    processData: false,
 				    async: false
-				})
+				})  // create SVG
 				$.ajax({
 				    type: 'POST',
 				    url: "/Home/CreateSvgRows",
@@ -166,7 +166,7 @@ var TicketInfo = function () {
 				    contentType: 'application/json; charset=UTF-8',
 				    processData: false,
 				    async: false
-				})
+				})  // create Rows 
 			},
 			error: function (jqXhr, textStatus, errorThrown) {
 				console.log(textStatus, errorThrown);
@@ -184,7 +184,8 @@ var TicketInfo = function () {
 				type: "post",
 				data: $(this).serialize(),
 				success: function (data) {
-					d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
+				    d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
+				    d3.select('text#r' + data.SeatId + '').remove();
 					window.open("/Home/OpenPDF?id=" + data.TicketId);
 				},
 				error: function (jqXhr, textStatus, errorThrown) {
@@ -266,7 +267,8 @@ $(document).ready(function () {
                                 else {
 
                                 	if (selectedItem != undefined) {
-                                		d3.select('rect#' + selectedItem + '').attr('fill', "#006699");
+                                	    d3.select('rect#' + selectedItem + '').attr('fill', "#006699");
+                                	    d3.select('text#' + selectedItem + '').remove();
                                 	}
                                 	selectedItem = this.__data__.svgId;
 
@@ -287,16 +289,6 @@ $(document).ready(function () {
                                                 .style("font", "8 8px Helvetica Neue")
                                                 .style("fill", "#006699")
                                                 .text("" + this.__data__.svgCol + "");
-
-                                    var allBlueRects = [];
-                                    allBlueRects = d3.selectAll('rect');
-
-                                    for (var i = 0; i < allBlueRects[0].length;i++)
-                                    {
-                                        //console.log(allBlueRects[0][i].attr('fill'));
-
-                                    }
-
                                     $("#Row").val(this.__data__.svgRow);
                                     $("#Number").val(this.__data__.svgCol);
                                     $("#SeatId").val(parseInt(this.__data__.svgId.substring(1, this.__data__.svgId.length)));
@@ -307,7 +299,7 @@ $(document).ready(function () {
         contentType: 'application/json; charset=UTF-8',
         processData: false,
         async: false
-    })
+    })  // create SVG first time
     $.ajax({
         type: 'POST',
         url: "/Home/CreateSvgRows",
@@ -318,7 +310,6 @@ $(document).ready(function () {
             console.log(data);
 
             var canvas = d3.selectAll("#svg1")
-
 
             var rects = canvas
                         .append('g')
@@ -357,5 +348,5 @@ $(document).ready(function () {
         contentType: 'application/json; charset=UTF-8',
         processData: false,
         async: false
-    })
+    })  // create Rows first time
 });
