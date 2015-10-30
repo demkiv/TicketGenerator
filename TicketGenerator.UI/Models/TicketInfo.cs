@@ -46,6 +46,7 @@ namespace TicketGenerator.UI.Models
 		[Required(ErrorMessage = "Middle Name is required")]
 		public string MiddleName { get; set; }
 
+		[Required]
 		public double Price { get; set; }
 	}
 }
