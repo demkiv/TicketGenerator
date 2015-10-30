@@ -194,35 +194,31 @@ var TicketInfo = function () {
 
 	var submitButtonClick = function (e) {
 
-		if (e != undefined) {
-			var seatid = $("#SeatId").val();
-			e.preventDefault();
-			console.log(seatid);
+		e.preventDefault();
+		var seatid = $("#SeatId").val();
 
-			if (seatid == undefined || seatid == "") {
-				alert("Please select a seat!");
-			} else {
+		if (seatid === "0" || seatid === "") {
+			alert("Please select a seat!");
+		} else {
 
-				$.ajax({
-					url: "/Home/TicketInfo",
-					type: "post",
-					data: $(this).serialize(),
-					success: function (data) {
-						d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
-						d3.select('text#r' + data.SeatId + '').remove();
+			$.ajax({
+				url: "/Home/TicketInfo",
+				type: "post",
+				data: $(this).serialize(),
+				success: function (data) {
+					d3.select('rect#r' + data.SeatId + '').attr('fill', "#C0C0C0");
+					d3.select('text#r' + data.SeatId + '').remove();
 
-						boughtItem = 'r' + data.SeatId;
-						selectedItem = undefined;
-						//d3.select('rect#r' + data.SeatId + '').attr('svgReserved', true);
+					boughtItem = 'r' + data.SeatId;
+					selectedItem = undefined;
 
+					window.open("/Home/OpenPDF?id=" + data.TicketId);
+				},
+				error: function (jqXhr, textStatus, errorThrown) {
+					console.log(textStatus, errorThrown);
+				}
+			});
 
-						window.open("/Home/OpenPDF?id=" + data.TicketId);
-					},
-					error: function (jqXhr, textStatus, errorThrown) {
-						console.log(textStatus, errorThrown);
-					}
-				});
-			}
 		}
 	}
 
@@ -236,7 +232,6 @@ var TicketInfo = function () {
 
 	return {
 		EventSectorInfo: eventSectorInfo,
-		SubmitButtonClick: submitButtonClick,
 		Bind: bind,
 		Unbind: unbind
 	};
@@ -358,6 +353,7 @@ $(document).ready(function () {
         processData: false,
         async: false
     })  // create SVG first time
+
     $.ajax({
         type: 'POST',
         url: "/Home/CreateSvgRows",

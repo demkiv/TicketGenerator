@@ -86,7 +86,6 @@ namespace TicketGenerator.UI.Controllers
 			};
 
 			return Json(newTicketInfo, JsonRequestBehavior.AllowGet);
-	        //return File(CreatePDF(newTicket.Id), "application/pdf");
         }
 
 	    public ActionResult OpenPDF(int id)
@@ -94,7 +93,8 @@ namespace TicketGenerator.UI.Controllers
 			return File(CreatePDF(id), "application/pdf");
 	    }
 
-        private byte[] CreatePDF(int ticketId)
+		#region RenderPDF
+		private byte[] CreatePDF(int ticketId)
         {
             ReportExecutionService rs = new ReportExecutionService();
 
@@ -114,6 +114,24 @@ namespace TicketGenerator.UI.Controllers
             return RenderReport(rs, format, mimeType, reportPath, parameters);
         }
 
+		private static byte[] RenderReport(ReportExecutionService rs, string format, string mimeType, string reportPath,
+			ParameterValue[] parameters)
+		{
+			rs.Credentials = CredentialCache.DefaultCredentials;
+
+			string deviceInfo = string.Empty;
+			string extension;
+			string encoding;
+			Warning[] warnings;
+			string[] streamIDs;
+
+			rs.LoadReport(reportPath, null);
+			rs.SetExecutionParameters(parameters, "en-us");
+			var results = rs.Render(format, deviceInfo, out extension, out mimeType, out encoding, out warnings, out streamIDs);
+
+			return results;
+		}
+#endregion
 
         public JsonResult CreateSvgItems(SectorInfo sectorInfo)
         {
@@ -225,23 +243,6 @@ namespace TicketGenerator.UI.Controllers
 
         }
 
-        private static byte[] RenderReport(ReportExecutionService rs, string format, string mimeType, string reportPath,
-            ParameterValue[] parameters)
-        {
-            rs.Credentials = CredentialCache.DefaultCredentials;
-
-            string deviceInfo = string.Empty;
-            string extension;
-            string encoding;
-            Warning[] warnings;
-            string[] streamIDs;
-
-            rs.LoadReport(reportPath, null);
-            rs.SetExecutionParameters(parameters, "en-us");
-            var results = rs.Render(format, deviceInfo, out extension, out mimeType, out encoding, out warnings, out streamIDs);
-
-            return results;
-        }
     }
 
 
