@@ -1,6 +1,5 @@
 ﻿
 var selectedItem;
-var boughtItem;
 
 var createSvg = function (data) {
 
@@ -12,6 +11,7 @@ var createSvg = function (data) {
 		data: data,
 		success: function (data) {
 			console.log(data);
+			seatsData = data;
 
 			$("svg#svg1").remove();
 
@@ -57,14 +57,19 @@ var createSvg = function (data) {
                 			return '#006699'
                 		}
                 	},
-
+                	'isReserved': function (data, index) {
+                		if (data.svgReserved) {
+                			return true;
+                		} else {
+                			return false;
+                		}
+                	}
                 })
                 .on("click", function (data) {
                 	var info = JSON.stringify(data);
 
-                	if (this.__data__.svgId == boughtItem) {
+                	if (d3.select('rect#' + this.__data__.svgId + '').attr('isReserved') == "true") {
                 		this.__data__.svgReserved = true;
-                		boughtItem = undefined;
                 	}
 
                 	if (this.__data__.svgReserved) {
@@ -206,10 +211,18 @@ var TicketInfo = function () {
 		hub.client.changeBoughtSeatsColor = function (eventId, sectorId, seatId) {
 
 			if (eventId === $("#EventId").val() && sectorId === $("#SectorId").val()) {
-				d3.select('rect#r' + seatId + '').attr('fill', "#C0C0C0");
-				d3.select('text#r' + seatId + '').remove();
 
-				boughtItem = 'r' + seatId;
+				if (d3.select('rect#r' + seatId + '').attr('fill') == "#FFFFCC")
+				{
+					$("#Row").val("");
+					$("#Number").val("");
+					$("#SeatId").val("");
+				}
+
+				d3.select('rect#r' + seatId + '').attr('fill', "#C0C0C0");
+				d3.select('rect#r' + seatId + '').attr('isReserved', "true");
+				d3.select('text#r' + seatId + '').remove();
+				
 				selectedItem = undefined;
 			}
 		};
