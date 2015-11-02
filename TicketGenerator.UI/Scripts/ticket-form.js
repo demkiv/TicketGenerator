@@ -223,7 +223,10 @@ var TicketInfo = function () {
 				d3.select('rect#r' + seatId + '').attr('isReserved', "true");
 				d3.select('text#r' + seatId + '').remove();
 				
-				selectedItem = undefined;
+				if (d3.select('rect#r' + seatId + '').attr('id') == selectedItem)
+				{
+					selectedItem = undefined;
+				}
 			}
 		};
 
